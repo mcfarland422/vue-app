@@ -25,23 +25,7 @@ export default {
   data() {
     return {
       newUser: {},
-      users: [
-        {
-          name: "Jimmy Doe",
-          email: "jdoe@gmail.com",
-          contacted: false
-        },
-        {
-          name: "Steve Smith",
-          email: "boringdude@gmail.com",
-          contacted: false
-        },
-        {
-          name: "Ned Stark",
-          email: "northremembers@gmail.com",
-          contacted: false
-        }
-      ]
+      users: []
     };
   },
   methods: {
@@ -58,7 +42,11 @@ export default {
     }
   },
   created: function() {
-    console.log("created ran...");
+    this.$http
+      .get("https://jsonplaceholder.typicode.com/users")
+      .then(function(response) {
+        this.users = response.data;
+      });
   }
 };
 </script>
